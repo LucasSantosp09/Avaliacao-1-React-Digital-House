@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState } from "react";
+import "./App.css";
+import FormDados from "./FormDados";
+import Card from "./Card";
 
 function App() {
+  const [colors, setColors] = useState([]);
+
+  const addColor = (color) => {
+    setColors([...colors, color]);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Adicionar Nova Cor</h1>
+      <FormDados onColorSubmit={addColor} />
+      <h2>Cores Favoritas</h2>
+      <div className="color-cards">
+        {colors.map((color, index) => (
+          <Card key={index} color={color} />
+        ))}
+      </div>
     </div>
   );
 }
